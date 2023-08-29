@@ -11,11 +11,15 @@ const AppRoutes = () => {
         <CssBaseline />
         <Box sx={{ backgroundColor: "background.default" }}>
           <BrowserRouter>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="login" element={<LoginPage />} />
+            <Routes>
+              <Route path="/" element={<LoginPage />} />
+              <Route path="login" element={<LoginPage />} />
+            </Routes>
           </BrowserRouter>
         </Box>
       </ThemeProvider>
     </CookiesProvider>
   );
 };
+
+export default AppRoutes;

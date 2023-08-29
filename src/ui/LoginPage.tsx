@@ -1,9 +1,10 @@
 import { Alert, Box, Paper, Snackbar, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { LoadingButton } from "@mui/lab";
-import configData from "../../config.json";
+import configData from "../config.json";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import "../theme/Styles.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const LoginPage = () => {
     let isValid = true;
     if (username == "") {
       setIsUsernameError(true);
-      setUsername("Please enter Username");
+      setUsernameError("Please enter Username");
       isValid = false;
     }
 
@@ -48,21 +49,21 @@ const LoginPage = () => {
       } else {
         setIsSnackbarOpen(true);
         setSnackbarMessage("Incorrect Username or Password");
-        setIsLoading(false);
       }
     }
+    setIsLoading(false);
   };
   const OnPasswordeChange = (text: string) => {
+    setPassword(text);
     if (text != "") {
-      setPassword(text);
       setIsPasswordError(false);
       setPasswordError("");
     }
   };
 
   const OnUsernameChange = (text: string) => {
+    setUsername(text);
     if (text != "") {
-      setUsername(text);
       setIsUsernameError(false);
       setUsernameError("");
     }
@@ -88,7 +89,7 @@ const LoginPage = () => {
           },
         }}
       >
-        <img className="margin-bottom-24" src={""} alt="Samadhan-Diamond Frames" width={104} height={104} />
+        <img className="margin-bottom-24" src={""} alt="Youtube C-Panel" width={104} height={104} />
 
         <TextField
           fullWidth
