@@ -23,19 +23,21 @@ const LoginPage = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
   useEffect(() => {
-    if (cookies && cookies.ycp && cookies.ycp.username) navigate(`/dashboard`);
-  }, []);
+    if (cookies && cookies.ycp && cookies.ycp.username) {
+      navigate(`/dashboard`);
+    }
+  }, [cookies, navigate]);
 
   const LoginClick = () => {
     setIsLoading(true);
     let isValid = true;
-    if (username == "") {
+    if (username === "") {
       setIsUsernameError(true);
       setUsernameError("Please enter Username");
       isValid = false;
     }
 
-    if (password == "") {
+    if (password === "") {
       setIsPasswordError(true);
       setPasswordError("Please enter Password");
       isValid = false;
@@ -55,7 +57,7 @@ const LoginPage = () => {
   };
   const OnPasswordeChange = (text: string) => {
     setPassword(text);
-    if (text != "") {
+    if (text !== "") {
       setIsPasswordError(false);
       setPasswordError("");
     }
@@ -63,7 +65,7 @@ const LoginPage = () => {
 
   const OnUsernameChange = (text: string) => {
     setUsername(text);
-    if (text != "") {
+    if (text !== "") {
       setIsUsernameError(false);
       setUsernameError("");
     }
@@ -78,50 +80,10 @@ const LoginPage = () => {
 
   return (
     <Box height="100vh" className="flex-center">
-      <Paper
-        className="padding-32 flex-center flex-column"
-        sx={{
-          minWidth: { sm: 480 },
-          width: { xs: "100%", sm: "unset" },
-          boxShadow: {
-            xs: "unset",
-            sm: "0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)",
-          },
-        }}
-      >
-        <img className="margin-bottom-24" src={""} alt="Youtube C-Panel" width={104} height={104} />
-
-        <TextField
-          fullWidth
-          label="Username"
-          variant="filled"
-          size="small"
-          inputProps={{
-            maxLength: 50,
-          }}
-          onChange={(e) => {
-            OnUsernameChange(e.target.value);
-          }}
-          error={isUsernameError}
-          helperText={usernameError}
-          value={username}
-          sx={{ mb: 2 }}
-        />
-        <TextField
-          fullWidth
-          type="password"
-          label="Password"
-          variant="filled"
-          size="small"
-          onChange={(e) => {
-            OnPasswordeChange(e.target.value);
-          }}
-          error={isPasswordError}
-          helperText={passwordError}
-          value={password}
-          sx={{ mb: 1 }}
-        />
-
+      <Paper className="padding-32 flex-center flex-column" sx={{ minWidth: { sm: 480 }, width: { xs: "100%", sm: "unset" }, boxShadow: { xs: "unset", sm: "0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)" } }}>
+        <img className="margin-bottom-24" src={require("../assets/logo192.png")} alt="Youtube C-Panel" width={104} height={104} />
+        <TextField fullWidth label="Username" variant="filled" size="small" inputProps={{ maxLength: 50 }} onChange={(e) => OnUsernameChange(e.target.value)} error={isUsernameError} helperText={usernameError} value={username} sx={{ mb: 2 }} />
+        <TextField fullWidth type="password" label="Password" variant="filled" size="small" onChange={(e) => OnPasswordeChange(e.target.value)} error={isPasswordError} helperText={passwordError} value={password} sx={{ mb: 1 }} />
         <LoadingButton loading={loading} type="submit" variant="contained" fullWidth={true} onClick={LoginClick}>
           Login
         </LoadingButton>

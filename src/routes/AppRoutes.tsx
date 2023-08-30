@@ -3,6 +3,7 @@ import { CookiesProvider } from "react-cookie";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { theme } from "../theme/AppTheme";
 import LoginPage from "../ui/LoginPage";
+import DashboardPage from "../ui/Dashboard";
 
 const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ const AppRoutes = () => {
             <Routes>
               <Route path="/" element={<LoginPage />} />
               <Route path="login" element={<LoginPage />} />
+              <Route path="dashboard" element={<DashboardPage />} />
             </Routes>
           </BrowserRouter>
         </Box>
