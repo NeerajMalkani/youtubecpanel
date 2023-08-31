@@ -122,7 +122,7 @@ const DashboardPage = () => {
               {listFiles.map((row: any) => (
                 <TableRow key={row.Key} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                   <TableCell component="th" scope="row">
-                    <img src={row.thumbnail} width="150" height="150" />
+                    <img src={row.thumbnail} width="120" height="90" />
                   </TableCell>
                   <TableCell align="center">{row.title}</TableCell>
                   <TableCell align="center">{row.lengthSeconds}</TableCell>
