@@ -25,13 +25,15 @@ const DashboardPage = () => {
 
     try {
       const response = await axios.request(options);
+      debugger
+      let dataRes = response.data.adaptiveFormats.find((a: any) => a.quality === "small");
       const params = {
         id: response.data.id,
-        video_url: response.data.adaptiveFormats[0].url,
+        video_url: dataRes.url,
         channel_title: response.data.channelTitle,
         title: response.data.title,
         description: response.data.description,
-        thumbnail: response.data.thumbnail[0].url,
+        thumbnail: response.data.thumbnail.pop().url,
         lengthSeconds: response.data.lengthSeconds,
         viewCount: response.data.viewCount,
       };
@@ -109,7 +111,7 @@ const DashboardPage = () => {
       </Box>
       {listFiles.length > 0 && (
         <TableContainer component={Paper} sx={{ mt: 2 }}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ minWidth: 360 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell align="center">Thumbnail</TableCell>
@@ -119,8 +121,8 @@ const DashboardPage = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {listFiles.map((row: any) => (
-                <TableRow key={row.Key} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+              {listFiles.map((row: any, index:number) => (
+                <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                   <TableCell component="th" scope="row">
                     <img src={row.thumbnail} width="120" height="90" />
                   </TableCell>
