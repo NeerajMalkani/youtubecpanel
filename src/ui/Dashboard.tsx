@@ -15,11 +15,11 @@ const DashboardPage = () => {
   const downloadVideo = async () => {
     const options = {
       method: "GET",
-      url: "https://ytstream-download-youtube-videos.p.rapidapi.com/dl",
+      url: "https://yt-api.p.rapidapi.com/dl",
       params: { id: youtubeid },
       headers: {
         "X-RapidAPI-Key": "Qtw5daIGTJmsha5QLAJJypOYspmxp1Fvr02jsnBNF5nCbUk9IG",
-        "X-RapidAPI-Host": "ytstream-download-youtube-videos.p.rapidapi.com",
+        "X-RapidAPI-Host": "yt-api.p.rapidapi.com",
       },
     };
 
@@ -45,7 +45,6 @@ const DashboardPage = () => {
         },
         data: params,
       });
-      debugger;
       if (datares.status === 200) {
         setYoutubeid("");
         GetVideoFromDatabase();
