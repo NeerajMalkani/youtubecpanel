@@ -25,8 +25,7 @@ const DashboardPage = () => {
 
     try {
       const response = await axios.request(options);
-      debugger
-      let dataRes = response.data.adaptiveFormats.find((a: any) => a.quality === "small");
+      let dataRes = response.data.formats.find((a: any) => a.mimeType.includes("video/mp4"));
       const params = {
         id: response.data.id,
         video_url: dataRes.url,
@@ -37,26 +36,22 @@ const DashboardPage = () => {
         lengthSeconds: response.data.lengthSeconds,
         viewCount: response.data.viewCount,
       };
-      axios
-        .post(
-          "https://api.starselector.com/api/youtubevideos/insert",
-          {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-            },
-          },
-          { params: params }
-        )
-        .then((insertResponse) => {
-          if (insertResponse.status === 200) {
-            setYoutubeid("");
-            GetVideoFromDatabase();
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      const datares = await axios({
+        method: "post",
+        url: "https://api.starselector.com/api/youtubevideos/insert",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        },
+        data: params,
+      });
+      debugger;
+      if (datares.status === 200) {
+        setYoutubeid("");
+        GetVideoFromDatabase();
+      } else {
+        console.error("error");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -121,7 +116,7 @@ const DashboardPage = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {listFiles.map((row: any, index:number) => (
+              {listFiles.map((row: any, index: number) => (
                 <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                   <TableCell component="th" scope="row">
                     <img src={row.thumbnail} width="120" height="90" />
